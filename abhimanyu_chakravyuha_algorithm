@@ -1,0 +1,36 @@
+
+
+//ALGORITHM
+Function checker(index,enemies[],current_power,behind_power,recharge,skip,initial_power)
+
+//Base condition
+if(index==enemies.size()) return true;
+
+op1=0,op2=0,op3=0
+
+if(current_power>=behind_power)
+      current_power-=behind_power
+      behind=0
+else
+    Return false
+
+//case 1 : Skip 
+if (skip>0)
+   op1=checker(index+1,enemies,current_power,behind_power,recharge,skip-1,initial_power)
+
+// case 2: Fight
+if(current_power>=enemies[index]){
+    
+     newBehind_power=behind_power
+      if(index==2 or index==6)
+                newBehind_power=enemies[index]/2;
+    op2=checker(index+1,enemies,current_power-enemies[index],newBehind_power,recharge,skip,initial_power)
+
+}
+
+//case 3:recharge
+
+if(recharge>0 and current_power<initial_power)
+      op3=checker(index,enemies,initial_power,behind_power,recharge,skip,initial_power)
+
+Return op1 or op2 or op3
